@@ -9,7 +9,7 @@ https://lovable.dev/projects/36820b65-f536-4f4f-baef-e50c17c50536
 The contents here mirror the folder structure and source files visible in Lovable's code view.  You can continue building the project in Lovable or use this as a reference in your own IDE.
 ## Backend
 
-A simple Express + Prisma backend lives in the `server/` folder. The project uses SQLite by default but can switch to another database by editing `DATABASE_PROVIDER` and `DATABASE_URL` in `.env`.
+A simple Express + Prisma backend lives in the `server/` folder. The Prisma schema is configured for SQLite by default. To use another database, update the `provider` field in `server/prisma/schema.prisma` and the `DATABASE_URL` value in `.env`.
 
 ### Setup
 
