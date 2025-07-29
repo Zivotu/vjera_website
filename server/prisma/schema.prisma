@@ -1,0 +1,95 @@
+datasource db {
+  provider = env("DATABASE_PROVIDER")
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum ArticleStatus {
+  draft
+  review
+  scheduled
+  published
+}
+
+enum ArticleType {
+  vijest
+  analiza
+  kolumna
+  intervju
+  duhovnost
+}
+
+enum Denomination {
+  katolicko
+  pravoslavno
+  protestantsko
+  ekumensko
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Author {
+  id        Int      @id @default(autoincrement())
+  name      String
+  slug      String   @unique
+  bio       String
+  avatarUrl String
+  twitter   String?
+  website   String?
+  role      String
+  articles  Article[]
+}
+
+model Category {
+  id       Int      @id @default(autoincrement())
+  name     String
+  slug     String   @unique
+  color    String
+  articles Article[]
+}
+
+model Article {
+  id           Int           @id @default(autoincrement())
+  slug         String        @unique
+  title        String
+  summary      String
+  content      String
+  status       ArticleStatus
+  type         ArticleType
+  denomination Denomination
+  authorId     Int
+  categoryId   Int
+  tags         String[]
+  sourceName   String?
+  sourceUrl    String?
+  publishedAt  DateTime
+  updatedAt    DateTime
+  heroImage    Json
+  featured     Boolean
+  readingTime  Int
+  views        Int
+
+  author   Author   @relation(fields: [authorId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  description String
+  city        String
+  country     String
+  denomination Denomination
+  startsAt    DateTime
+  endsAt      DateTime
+  heroImage   Json
+}
