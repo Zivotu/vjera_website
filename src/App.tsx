@@ -3,6 +3,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import Index from './pages/Index';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import { ToastProvider } from './hooks/use-toast';
 
@@ -22,6 +24,8 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/index" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               {/* add more routes here as you build additional pages */}
               <Route path="*" element={<NotFound />} />
             </Routes>
