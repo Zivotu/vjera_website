@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom variables and styles can be added here to match the original project.
+   The original project defines a number of CSS custom properties for colours,
+   gradients, and other design tokens.  Feel free to extend this file as needed. */
