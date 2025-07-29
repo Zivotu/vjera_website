@@ -1,0 +1,61 @@
+CREATE TABLE IF NOT EXISTS User (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT UNIQUE,
+  passwordHash TEXT NOT NULL,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS Author (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  slug TEXT UNIQUE,
+  bio TEXT NOT NULL,
+  avatarUrl TEXT NOT NULL,
+  twitter TEXT,
+  website TEXT,
+  role TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Category (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  slug TEXT UNIQUE,
+  color TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Article (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  slug TEXT UNIQUE,
+  title TEXT NOT NULL,
+  summary TEXT NOT NULL,
+  content TEXT NOT NULL,
+  status TEXT NOT NULL,
+  type TEXT NOT NULL,
+  denomination TEXT NOT NULL,
+  authorId INTEGER,
+  categoryId INTEGER,
+  tags TEXT,
+  sourceName TEXT,
+  sourceUrl TEXT,
+  publishedAt DATETIME NOT NULL,
+  updatedAt DATETIME NOT NULL,
+  heroImage TEXT,
+  featured BOOLEAN,
+  readingTime INTEGER,
+  views INTEGER,
+  FOREIGN KEY(authorId) REFERENCES Author(id),
+  FOREIGN KEY(categoryId) REFERENCES Category(id)
+);
+
+CREATE TABLE IF NOT EXISTS Event (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  slug TEXT UNIQUE,
+  description TEXT NOT NULL,
+  city TEXT NOT NULL,
+  country TEXT NOT NULL,
+  denomination TEXT NOT NULL,
+  startsAt DATETIME NOT NULL,
+  endsAt DATETIME NOT NULL,
+  heroImage TEXT
+);
