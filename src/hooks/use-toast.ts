@@ -11,6 +11,8 @@ export interface Toast {
   id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
+  /** Optional action element rendered alongside the toast content. */
+  action?: React.ReactNode;
   timeout?: number;
 }
 
