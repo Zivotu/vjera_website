@@ -14,12 +14,15 @@ This project combines a small Express API with a React frontend. The backend liv
    npm install
    npm run migrate -- --schema server/prisma/schema.prisma
    ```
-3. Start the API server:
+3. Seed the database with sample data:
+   ```bash
+   npm run seed
+   ```
+4. Start the API server:
    ```bash
    npm run server
    ```
-   The API will be available at `http://localhost:4000` by default with REST and GraphQL endpoints. Set `VITE_API_BASE` accordingly for the frontend.
-4. In a separate terminal run the frontend:
+
    ```bash
    npm run dev
    ```
