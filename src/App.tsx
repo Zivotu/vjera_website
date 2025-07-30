@@ -6,6 +6,10 @@ import Index from './pages/Index';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
+import Articles from './pages/dashboard/Articles';
+import Categories from './pages/dashboard/Categories';
+import Authors from './pages/dashboard/Authors';
+import Events from './pages/dashboard/Events';
 import { ToastProvider } from './hooks/use-toast';
 
 /**
@@ -26,6 +30,10 @@ const App: React.FC = () => {
               <Route path="/index" element={<Index />} />
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard/articles" element={<Articles />} />
+              <Route path="/dashboard/categories" element={<Categories />} />
+              <Route path="/dashboard/authors" element={<Authors />} />
+              <Route path="/dashboard/events" element={<Events />} />
               {/* add more routes here as you build additional pages */}
               <Route path="*" element={<NotFound />} />
             </Routes>

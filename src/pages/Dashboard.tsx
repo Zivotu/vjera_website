@@ -1,41 +1,29 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useToast } from '../hooks/use-toast';
-import type { Article } from '../lib/types';
 
 /**
- * Simple dashboard that requires a JWT token to view. It lists articles
- * from the backend and provides a logout button.
+ * Simple admin landing page. It ensures the user is authenticated and
+ * provides navigation links to manage all resources.
  */
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [articles, setArticles] = React.useState<Article[]>([]);
 
   React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
+    if (!localStorage.getItem('token')) {
       navigate('/login');
-      return;
     }
-    fetch('http://localhost:4000/articles', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setArticles(data))
-      .catch((err) => {
-        console.error(err);
-        toast({ title: 'Greška pri dohvaćanju članaka' });
-      });
-  }, [navigate, toast]);
+  }, [navigate]);
 
   function handleLogout() {
     localStorage.removeItem('token');
+    toast({ title: 'Odjavljeni ste' });
     navigate('/login');
   }
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4 space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold">Nadzorna ploča</h1>
         <button
@@ -45,18 +33,21 @@ const Dashboard: React.FC = () => {
           Odjava
         </button>
       </div>
-      <section>
-        <h2 className="text-xl font-semibold mb-2">Članci</h2>
-        {articles.length === 0 ? (
-          <p>Nema dostupnih članaka.</p>
-        ) : (
-          <ul className="list-disc list-inside space-y-1">
-            {articles.map((article) => (
-              <li key={article.id}>{article.title}</li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <nav className="space-x-4">
+        <Link className="text-blue-600 underline" to="/dashboard/articles">
+          Članci
+        </Link>
+        <Link className="text-blue-600 underline" to="/dashboard/categories">
+          Kategorije
+        </Link>
+        <Link className="text-blue-600 underline" to="/dashboard/authors">
+          Autori
+        </Link>
+        <Link className="text-blue-600 underline" to="/dashboard/events">
+          Događaji
+        </Link>
+      </nav>
+      <p className="text-gray-700">Odaberite sekciju za uređivanje podataka.</p>
     </div>
   );
 };
