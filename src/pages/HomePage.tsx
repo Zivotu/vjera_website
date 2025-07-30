@@ -146,7 +146,7 @@ const HomePage: React.FC = () => {
                 <div>
                   <strong>{event.title}</strong>
                   <p className="text-sm text-gray-600">
-                    {event.location.city}, {event.location.country}
+                    {event.city}, {event.country}
                   </p>
                 </div>
                 <span className="text-sm text-gray-500">{new Date(event.startsAt).toLocaleDateString('hr-HR')}</span>
