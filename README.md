@@ -1,55 +1,36 @@
-# Vjera Hub Project
+# Vjera Hub
 
-This directory contains an exported snapshot of the **Vjera Hub** project from [Lovable](https://lovable.dev).  The original project lives at:
+This project combines a small Express API with a React frontend. The backend lives in the `server/` folder while the frontend source is in `src/`.
 
-```
-https://lovable.dev/projects/36820b65-f536-4f4f-baef-e50c17c50536
-```
+## Requirements
+* Node.js 18+
+* PostgreSQL database
 
-The contents here mirror the folder structure and source files visible in Lovable's code view.  You can continue building the project in Lovable or use this as a reference in your own IDE.
-## Backend
+## Setup
 
-A simple Express + Prisma backend lives in the `server/` folder. The Prisma schema is configured for SQLite by default. To use another database, update the `provider` field in `server/prisma/schema.prisma` and the `DATABASE_URL` value in `.env`.
+1. Copy `.env.example` to `.env` and update the values for your database connection and JWT secret.
+2. Install dependencies and run the database migrations:
+   ```bash
+   npm install
+   npm run migrate -- --schema server/prisma/schema.prisma
+   ```
+3. Start the API server:
+   ```bash
+   npm run server
+   ```
+   The API will be available at `http://localhost:4000` with REST and GraphQL endpoints.
+4. In a separate terminal run the frontend:
+   ```bash
+   npm run dev
+   ```
+   The site is served on `http://localhost:8080`.
 
-### Setup
+### Creating a user
 
-1. Copy `server/.env.example` to `server/.env` and adjust the values.
-2. Install dependencies and run database migrations:
-
-```bash
-npm install
-npm run migrate -- --schema server/prisma/schema.prisma
-```
-
-3. Start the backend in development mode:
-
-```bash
-npm run server
-```
-
-This starts the API on `http://localhost:4000` with both REST endpoints and GraphQL available at `/graphql`.
-
-## Frontend
-
-1. Start the Vite development server in a separate terminal:
-
-```bash
-npm run dev
-```
-
-The application will be available at `http://localhost:8080`.
-
-### Authentication and Dashboard
-
-1. Register a user (only once) by sending a POST request to the backend:
-
+Before logging in you need to register an account:
 ```bash
 curl -X POST http://localhost:4000/auth/register \
   -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"test"}'
+  -d '{"email":"you@example.com","password":"secret"}'
 ```
-
-2. Visit `http://localhost:8080/login` and log in with the credentials you created. After successful login you will be redirected to the dashboard.
-
-3. The dashboard at `http://localhost:8080/dashboard` displays articles fetched from `/articles` and can only be accessed while a token is stored in `localStorage`.
-
+Use these credentials on the `/login` page. After authentication you will be redirected to the dashboard which fetches articles from the API.
