@@ -25,12 +25,16 @@ This project combines a small Express API with a React frontend. The backend liv
    ```
    The site is served on `http://localhost:8080`.
 
-### Creating a user
+### Default credentials
 
-Before logging in you need to register an account:
+The API automatically ensures an administrator account exists:
+
+- **Email:** `amir@yahoo.com`
+- **Password:** `123456`
+
+Use these credentials on the `/login` page to access the dashboard. To create additional users run:
 ```bash
 curl -X POST http://localhost:4000/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"you@example.com","password":"secret"}'
 ```
-Use these credentials on the `/login` page. After authentication you will be redirected to the dashboard which fetches articles from the API.

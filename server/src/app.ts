@@ -25,6 +25,18 @@ function generateToken(userId: number) {
   return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' });
 }
 
+// Ensure default admin user exists
+async function ensureAdmin() {
+  const email = 'amir@yahoo.com';
+  const password = '123456';
+  const existing = await prisma.user.findUnique({ where: { email } });
+  if (!existing) {
+    const passwordHash = await bcrypt.hash(password, 10);
+    await prisma.user.create({ data: { email, passwordHash } });
+    console.log(`Created default admin user: ${email}`);
+  }
+}
+
 // Authentication middleware
 function authMiddleware(req: express.Request, res: express.Response, next: express.NextFunction) {
   const header = req.headers.authorization;
@@ -360,6 +372,7 @@ const resolvers = {
 };
 
 async function start() {
+  await ensureAdmin();
   const server = new ApolloServer({ typeDefs, resolvers });
   await server.start();
   server.applyMiddleware({ app });
