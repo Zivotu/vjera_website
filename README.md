@@ -18,6 +18,8 @@ This project combines a small Express API with a React frontend. The backend liv
    ```bash
    npm run seed
    ```
+   This command reads demo authors, categories, articles and events from
+   `src/lib/mockData.ts` and inserts them into the database.
 4. Start the API server:
    ```bash
    npm run server
