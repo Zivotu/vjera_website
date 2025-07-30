@@ -8,7 +8,7 @@ This project combines a small Express API with a React frontend. The backend liv
 
 ## Setup
 
-1. Copy `.env.example` to `.env` and update the values for your database connection and JWT secret.
+1. Copy `.env.example` to `.env` and update the values for your database connection, JWT secret and `VITE_API_BASE` if needed.
 2. Install dependencies and run the database migrations:
    ```bash
    npm install
@@ -22,8 +22,7 @@ This project combines a small Express API with a React frontend. The backend liv
    ```bash
    npm run server
    ```
-   The API will be available at `http://localhost:4000` with REST and GraphQL endpoints.
-5. In a separate terminal run the frontend:
+
    ```bash
    npm run dev
    ```
@@ -38,7 +37,7 @@ The API automatically ensures an administrator account exists:
 
 Use these credentials on the `/login` page to access the dashboard. To create additional users run:
 ```bash
-curl -X POST http://localhost:4000/auth/register \
+curl -X POST $VITE_API_BASE/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"you@example.com","password":"secret"}'
 ```

@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import type { Article, Author, Category } from "../lib/types";
-import { authors, categories } from "../lib/mockData";
 
 export interface ArticleCardProps {
   /** The article record to display */
   article: Article;
+  /** Author belonging to the article */
+  author?: Author;
+  /** Category belonging to the article */
+  category?: Category;
   /** Controls the vertical height of the image container */
   size?: "small" | "medium" | "large";
   /** Whether to show the hero image at the top of the card */
@@ -20,11 +23,11 @@ export interface ArticleCardProps {
  */
 const ArticleCard: React.FC<ArticleCardProps> = ({
   article,
+  author,
+  category,
   size = "medium",
   showImage = true,
 }) => {
-  const author: Author | undefined = authors.find((a) => a.id === article.authorId);
-  const category: Category | undefined = categories.find((c) => c.id === article.categoryId);
 
   const sizeClasses: Record<string, string> = {
     small: "h-32",
