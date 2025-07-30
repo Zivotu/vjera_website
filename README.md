@@ -8,7 +8,7 @@ This project combines a small Express API with a React frontend. The backend liv
 
 ## Setup
 
-1. Copy `.env.example` to `.env` and update the values for your database connection, JWT secret and `VITE_API_BASE` if needed.
+1. Copy `.env.example` to `.env` and update the values for your database connection, JWT secret and `VITE_API_BASE` if needed. This file is ignored by Git so your credentials stay local.
 2. Install dependencies and run the database migrations:
    ```bash
    npm install
