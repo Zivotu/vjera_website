@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
       navigate('/login');
       return;
     }
-    fetch('http://localhost:4000/articles', {
+    fetch(`${import.meta.env.VITE_API_BASE}/articles`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
