@@ -17,6 +17,8 @@ const Header: React.FC = () => {
     { name: "Kalendar", href: "/kalendar" },
   ];
 
+  const token = localStorage.getItem('token');
+
   const isActive = (href: string) => {
     if (href === "/") {
       return location.pathname === "/";
@@ -42,6 +44,12 @@ const Header: React.FC = () => {
               {item.name}
             </Link>
           ))}
+          <Link
+            to={token ? "/dashboard" : "/login"}
+            className="text-sm font-medium text-gray-600 hover:text-blue-700"
+          >
+            {token ? "Dashboard" : "Prijava"}
+          </Link>
         </nav>
         {/* Simple mobile menu toggle - optional */}
         <div className="md:hidden">

@@ -37,7 +37,7 @@ This starts the API on `http://localhost:4000` with both REST endpoints and Grap
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`.
+The application will be available at `http://localhost:8080`.
 
 ### Authentication and Dashboard
 
@@ -49,7 +49,7 @@ curl -X POST http://localhost:4000/auth/register \
   -d '{"email":"test@example.com","password":"test"}'
 ```
 
-2. Visit `http://localhost:5173/login` and log in with the credentials you created. After successful login you will be redirected to the dashboard.
+2. Visit `http://localhost:8080/login` and log in with the credentials you created. After successful login you will be redirected to the dashboard.
 
-3. The dashboard at `http://localhost:5173/dashboard` displays articles fetched from `/articles` and can only be accessed while a token is stored in `localStorage`.
+3. The dashboard at `http://localhost:8080/dashboard` displays articles fetched from `/articles` and can only be accessed while a token is stored in `localStorage`.
 
