@@ -14,7 +14,7 @@ const Dashboard: React.FC = () => {
     if (!localStorage.getItem('token')) {
       navigate('/login');
     }
-
+  }, [navigate]);
 
   function handleLogout() {
     localStorage.removeItem('token');
