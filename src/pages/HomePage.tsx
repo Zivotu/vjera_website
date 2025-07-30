@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 // Import our card component and mock data. These live in the same repo so
 // relative imports work even though the real project uses path aliases.
 import ArticleCard from "../components/ArticleCard";
-import { articles, events, categories } from "../lib/mockData";
+import type { Article, Event, Category, Author } from "../lib/types";
+import { fetchArticles, fetchEvents, fetchCategories, fetchAuthors } from "../lib/api";
 
 /**
  * The home page of the Vjerski Portal. In the original project this file
@@ -16,7 +17,18 @@ import { articles, events, categories } from "../lib/mockData";
  * your own CSS.
  */
 const HomePage: React.FC = () => {
-  // Break the imported articles into the same groupings used in the UI.
+  const [articles, setArticles] = React.useState<Article[]>([]);
+  const [events, setEvents] = React.useState<Event[]>([]);
+  const [categories, setCategories] = React.useState<Category[]>([]);
+  const [authors, setAuthors] = React.useState<Author[]>([]);
+
+  React.useEffect(() => {
+    fetchArticles().then(setArticles).catch(console.error);
+    fetchEvents().then(setEvents).catch(console.error);
+    fetchCategories().then(setCategories).catch(console.error);
+    fetchAuthors().then(setAuthors).catch(console.error);
+  }, []);
+
   const featuredArticles = articles.filter((a) => a.featured);
   const latestArticles = articles.slice(0, 3);
   const analysisArticles = articles.filter((a) => a.type === "analiza");
@@ -38,7 +50,13 @@ const HomePage: React.FC = () => {
           <h2 className="text-2xl font-semibold mb-4">Istaknuti članci</h2>
           <div className="grid gap-4 md:grid-cols-3">
             {featuredArticles.map((article) => (
-              <ArticleCard key={article.id} article={article} size="large" />
+              <ArticleCard
+                key={article.id}
+                article={article}
+                author={authors.find((a) => a.id === article.authorId)}
+                category={categories.find((c) => c.id === article.categoryId)}
+                size="large"
+              />
             ))}
           </div>
         </section>
@@ -54,7 +72,13 @@ const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           {latestArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} size="medium" />
+            <ArticleCard
+              key={article.id}
+              article={article}
+              author={authors.find((a) => a.id === article.authorId)}
+              category={categories.find((c) => c.id === article.categoryId)}
+              size="medium"
+            />
           ))}
         </div>
       </section>
@@ -69,7 +93,13 @@ const HomePage: React.FC = () => {
             </Link>
           </div>
           {analysisArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} size="small" />
+            <ArticleCard
+              key={article.id}
+              article={article}
+              author={authors.find((a) => a.id === article.authorId)}
+              category={categories.find((c) => c.id === article.categoryId)}
+              size="small"
+            />
           ))}
         </div>
         <div>
@@ -80,7 +110,13 @@ const HomePage: React.FC = () => {
             </Link>
           </div>
           {spiritualArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} size="small" />
+            <ArticleCard
+              key={article.id}
+              article={article}
+              author={authors.find((a) => a.id === article.authorId)}
+              category={categories.find((c) => c.id === article.categoryId)}
+              size="small"
+            />
           ))}
         </div>
       </section>

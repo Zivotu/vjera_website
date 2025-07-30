@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "server": "tsx server/src/app.ts",
     "migrate": "prisma migrate dev",
+    "seed": "tsx server/seed.ts",
     "prisma": "prisma"
   },
   "dependencies": {
