@@ -37,12 +37,12 @@ const Events: React.FC = () => {
     const url = editing
       ? `http://localhost:4000/events/${editing}`
       : 'http://localhost:4000/events';
-    const payload = {
-      title: form.title,
-      slug: form.slug,
-      description: (form as any).description || '',
-      city: (form as any).location?.city || '',
-      country: (form as any).location?.country || '',
+      const payload = {
+        title: form.title,
+        slug: form.slug,
+        description: (form as any).description || '',
+        city: (form as any).city || '',
+        country: (form as any).country || '',
       denomination: (form as any).denomination || 'katolicko',
       startsAt: (form as any).startsAt || new Date().toISOString(),
       endsAt: (form as any).endsAt || new Date().toISOString(),

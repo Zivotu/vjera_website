@@ -5,7 +5,7 @@
  */
 
 export interface Article {
-  id: string;
+  id: number;
   slug: string;
   title: string;
   summary: string;
@@ -13,8 +13,8 @@ export interface Article {
   status: 'draft' | 'review' | 'scheduled' | 'published';
   type: 'vijest' | 'analiza' | 'kolumna' | 'intervju' | 'duhovnost';
   denomination: 'katoličko' | 'pravoslavno' | 'protestantsko' | 'ekumensko';
-  authorId: string;
-  categoryId: string;
+  authorId: number;
+  categoryId: number;
   tags: string[];
   sourceName?: string;
   sourceUrl?: string;
@@ -32,7 +32,7 @@ export interface Article {
 }
 
 export interface Author {
-  id: string;
+  id: number;
   name: string;
   slug: string;
   bio: string;
@@ -45,23 +45,19 @@ export interface Author {
 }
 
 export interface Category {
-  id: string;
+  id: number;
   name: string;
   slug: string;
   color: string;
 }
 
-export interface EventLocation {
-  city: string;
-  country: string;
-}
-
 export interface Event {
-  id: string;
+  id: number;
   title: string;
   slug: string;
   description: string;
-  location: EventLocation;
+  city: string;
+  country: string;
   denomination: Category['slug'];
   startsAt: string;
   endsAt: string;
