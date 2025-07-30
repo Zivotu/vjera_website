@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "ts-node-dev --project server/tsconfig.json server/src/app.ts",
+    "server": "tsx server/src/app.ts",
     "migrate": "prisma migrate dev",
     "prisma": "prisma"
   },
@@ -46,9 +46,11 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.0.0",
     "cmdk": "^1.1.1",
+    "dotenv": "^17.2.1",
     "embla-carousel-react": "^8.6.0",
     "express": "^4.18.2",
     "graphql": "^16.8.1",
+    "graphql-type-json": "^0.3.2",
     "input-otp": "^1.4.2",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.534.0",
@@ -66,6 +68,9 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@eslint/js": "^8.57.1",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^4.7.0",
@@ -76,8 +81,8 @@
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.3.3",
-    "vite": "^4.4.9",
-    "@eslint/js": "^8.57.1"
+    "vite": "^4.4.9"
   }
 }
