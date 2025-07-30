@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
  */
 const Header: React.FC = () => {
   const location = useLocation();
-  const navigation = [
+  const baseNavigation = [
     { name: "Naslovnica", href: "/" },
     { name: "Vijesti", href: "/vijesti" },
     { name: "Analize", href: "/analize" },
@@ -18,6 +18,18 @@ const Header: React.FC = () => {
   ];
 
   const token = localStorage.getItem('token');
+
+  const adminNavigation = token
+    ? [
+        { name: "Dashboard", href: "/dashboard" },
+        { name: "Članci", href: "/dashboard/articles" },
+        { name: "Kategorije", href: "/dashboard/categories" },
+        { name: "Autori", href: "/dashboard/authors" },
+        { name: "Događaji", href: "/dashboard/events" },
+      ]
+    : [];
+
+  const navigation = [...baseNavigation, ...adminNavigation];
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -44,17 +56,17 @@ const Header: React.FC = () => {
               {item.name}
             </Link>
           ))}
-          <Link
-            to={token ? "/dashboard" : "/login"}
-            className="text-sm font-medium text-gray-600 hover:text-blue-700"
-          >
-            {token ? "Dashboard" : "Prijava"}
-          </Link>
+          {!token && (
+            <Link
+              to="/login"
+              className="text-sm font-medium text-gray-600 hover:text-blue-700"
+            >
+              Prijava
+            </Link>
+          )}
         </nav>
         {/* Simple mobile menu toggle - optional */}
-        <div className="md:hidden">
-          {/* In a real app you'd implement a drawer menu here. */}
-        </div>
+        <div className="md:hidden">{/* In a real app you'd implement a drawer menu here. */}</div>
       </div>
     </header>
   );
